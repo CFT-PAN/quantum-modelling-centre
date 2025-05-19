@@ -10,3 +10,7 @@ title: "News"
     </li>
   {% endfor %}
 </ul>
+
+{% for post in site.posts %}
+- [{{post.title}}]({% link {{ post.path }} %} )
+{% endfor %}
