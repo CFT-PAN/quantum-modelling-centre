@@ -4,10 +4,6 @@ title: "Research Software"
 permalink: /software/
 ---
 
-<ul>
-  {% for post in site.software %}
-    <li>
-      <a href="{{ post.url }}">{{ post.title }}</a>
-    </li>
-  {% endfor %}
-</ul>
+{% for post in site.software %}
+- [{{post.title}}]({% link {{ post.path }} %} )
+{% endfor %}
