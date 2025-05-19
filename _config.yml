@@ -23,10 +23,10 @@ nav_pages:
 
 collections:
   software:
-    permalink: /:collection/:name
+    permalink: /:collection/:name:output_ext
     output: true
   tutorials:
-    permalink: /:collection/:name
+    permalink: /:collection/:name:output_ext
     output: true
 
 defaults:
