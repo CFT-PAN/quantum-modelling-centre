@@ -1,10 +1,11 @@
 ---
 layout: home
-title: "News"
+title: "Tutorials"
+permalink: /tutorials/
 ---
 
 <ul>
-  {% for post in site.posts %}
+  {% for post in site.tutorials %}
     <li>
       <a href="{{ post.url }}">{{ post.title }}</a>
     </li>
