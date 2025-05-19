@@ -230,7 +230,7 @@
  * Page content
  */
 .page-content {
-  padding: 3 * $spacing-unit 0;
+  padding-bottom: 3 * $spacing-unit;
   flex: 1 0 auto;
 }
 
@@ -267,8 +267,11 @@
  * Posts
  */
 .post-header {
-  margin-bottom: $spacing-unit;
+  // margin-bottom: $spacing-unit;
   padding-bottom: 18px;
+  height: 5 * $spacing-unit - 18px;
+  display: flex;
+  align-items: flex-end;
   // text-align: center;
   border-bottom: 1px solid $border-color-01;
 }
@@ -448,7 +451,7 @@
 
 .sidebar {
   text-align: center;
-  padding: 3 * $spacing-unit 1rem;
+  padding: 0 1rem;
   // height: auto;
   border-right: 1px solid $border-color-01;
 }
@@ -465,47 +468,58 @@
 
 /* Sidebar links */
 .sidebar-toc a {
-  // color: #fff;
   padding: 6px 0px 6px;
   text-decoration: none;
-  font-size: 1.25rem;
-  color: #818181;
+  font-size: 1rem;
+  color: $text-color;
   display: block;
   background: none;
   width:100%;
   text-align: left;
   cursor: pointer;
   outline: none;
+  padding-left: 0.5rem;
 }
-
+.sidebar-toc ul > li > a:hover {
+  background: $code-background-color;
+  transition: background-color 0.5s;
+  border-radius: 10px;
+}
 .sidebar-toc ul {
   list-style-type: none;
   list-style-position: outside;
   margin-left: 0;
 }
 .sidebar-toc > ul > li {
-  border-top: 1px solid $border-color-01;
-}
-.sidebar-toc ul > li > ul {
   border-top: 0px solid $border-color-01;
-  margin-left: $spacing-unit;
 }
-
-// .sidebar li {
-//   > ul {
-//     border-top: 0px solid $border-color-01;
-//     margin-left: $spacing-unit;
-//   }
-// }
+.sidebar-toc ul > li > ul > li {
+  border-top: 0px solid $border-color-01;
+  padding-left: 1rem;
+  // text-align: start;
+  // text-indent: 1rem;
+}
 
 /* About section */
 .sidebar-header {
   // color: #fff;
+  margin-bottom: $spacing-unit;
+  // padding-top: 3 * $spacing-unit;
+  height: 5 * $spacing-unit;
+  // padding-bottom: 18px;
   list-style-type: none;
   text-align: left;
   list-style-position: outside;
+  padding-left: 0.5rem;
+  border-bottom: 1px solid $border-color-01;
+  display: flex;
+  align-items: flex-end;
   // margin-top: 0;
   // font-family: "Abril Fatface", serif;
+}
+.sidebar-header h2 {
+  padding-bottom: 18px;
+  margin-bottom: 0px;
 }
 
 /* Sidebar nav */
@@ -516,7 +530,6 @@
   display: block;
   line-height: 1.75;
 }
-a.sidebar-nav-item:hover,
 a.sidebar-nav-item:focus {
   text-decoration: underline;
 }

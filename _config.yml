@@ -13,6 +13,8 @@ kramdown:
   math_engine: mathjax
   syntax_highlighter: rouge
 
+remote_theme: "jekyll/minima@0b7ca6b"
+
 nav_pages:
   - index.md
   - software.md
@@ -41,3 +43,4 @@ plugins:
   - jekyll-gist
   - jekyll-paginate
   - jekyll-seo-tag
+  - jekyll-remote-theme
