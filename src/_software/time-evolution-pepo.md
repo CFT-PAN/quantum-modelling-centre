@@ -1,5 +1,7 @@
 ---
 title: "TimeEvolutionPEPO.jl"
+header:
+    teaser: /assets/images/time-evolution-pepo.png
 ---
 
 This is a Julia package. Julia can be installed by running, in your terminal:

@@ -1,9 +1,7 @@
 ---
-layout: home
-title: "Tutorials"
+title: Tutorials
+layout: collection
 permalink: /tutorials/
+collection: tutorials
+classes: wide
 ---
-
-{% for post in site.tutorials %}
-- [{{post.title}}]({% link {{ post.path }} %} )
-{% endfor %}

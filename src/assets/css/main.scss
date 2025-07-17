@@ -1,0 +1,49 @@
+---
+# Only the main Sass file needs front matter (the dashes are enough)
+search: false
+---
+
+@charset "utf-8";
+
+
+/* system typefaces */
+$serif      : Georgia, Times, serif;
+$sans-serif : Roboto;
+$monospace  : "Roboto Mono";
+
+$doc-font-size:   12px !default;
+
+@import "minimal-mistakes/skins/{{ site.minimal_mistakes_skin | default: 'default' }}"; // skin
+@import "minimal-mistakes"; // main partials
+
+#footer-logo-cft {
+  background: url('../../assets/images/cft_logo.webp') no-repeat center center;
+  background-size: 70px;
+  height: 100px;
+  width: 100px;
+  display: table-cell;
+}
+#footer-logo-fund {
+  background: url('../../assets/images/EU_central_logo.svg') no-repeat center center;
+  background-size: 100px;
+  height: 100px;
+  width: 150px;
+  display: table-cell;
+}
+#footer-logo-eu {
+  background: url('../../assets/images/eu_logo.webp') no-repeat center center;
+  background-size: 300px;
+  height: 100px;
+  width: 300px;
+  display: table-cell;
+}
+#footer-desc {
+  // width: 500px;
+  width: 40%;
+  display: table-cell;
+}
+#footer-footer {
+  text-align: center;
+  font-style: italic;
+  font-size: $type-size-8;
+}
