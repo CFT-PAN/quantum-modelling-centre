@@ -2,13 +2,17 @@
 title: "TimeEvolutionPEPO.jl"
 header:
     teaser: /assets/images/time-evolution-pepo.png
----
+    caption: "From:"
+github: "jack-dunham/TimeEvolutionPEPO.jl"
+deps:
+    - name: julia
+      version: 1.11
 
-This is a Julia package. Julia can be installed by running, in your terminal:
-```bash
-curl -fsSL https://install.julialang.org | sh
-```
-which installs both `julia` and the Julia version manager `juliaup`.
+docs: "https://jack-dunham.github.io/TimeEvolutionPEPO.jl/dev/"
+software_links: true
+layout: software
+excerpt: "TimeEvolutionPEPO.jl is a high-level and domain-specific package for simulating the time-evolution of an open-quantum system represented by the iPEPO ansatz. A variety of options are implemented under one common interface for both Lindblad real-time evolution and thermal state annealing."
+---
 
 # Installation
 
@@ -39,57 +43,55 @@ Additional packages that might be useful can also be added:
 (MyProject) pkg> add Plots, DataFrames
 ```
 
-# Usage
+# Code Example
 
 ```julia
-function thermalising(; D = 2)
+function thermalising(; Jz = 1.0, D = 2)
+    _, _, Z = PAULI
+
+    # Spin-1/2 local Hilbert space dimension
+    localdim = 2
 
     # Initialise to the infinite temperate thermal state on 2x2 unit cell lattice
-    rho = fill(ThermalState(),2,2)
+    rho = PEPO(fill(ThermalState(),2,2), localdim, D)
 
     # Define the square lattice Ising model critical temperature
     βc = log(1 + sqrt(2)) / 2
 
-    # Construct the model itself
-    H = Heisenberg(;  Jz = -1.0);
+    # Construct the anti-ferromagnetic Ising model
+    model = Model(Jz * LocalOp(Z, Z))
 
-    # Define a method, here we use time-evolving block decimation (TEBD)
-    method = TEBD(
-        numsteps=1000, 
-        timestep=0.002*βc, 
-        truncalg=PEPOKit.SU(ξ = xi)
-    )
-
-    # We define the interactions to be the same on each axis.
-    model = [OnAxis(H,1), OnAxis(H,2)]
+    # Define a method, here we use time-evolving block decimation (TEBD) with default options
+    method = TEBD()
 
     # We also need to define how we compute observables. Here we use the VUMPS algorithm
-    obsalg = VUMPS(bonddim=16, maxiter=200, tol=1e-10)
-
-    # The local Hilbert space is set to a non-symmetric vector space of dimension 2
-    localspace = ComplexSpace(2)
-
-    # The bond dimension can be controlled
-    bondspace = ComplexSpace(D)
+    obsalg = VUMPS(bonddim=16, maxiter=200, tol=1e-8)
 
     # We then set up the problem we wish to solve
-    sim = Simulation(model, rho, bondspace; physical = localspace, method = method)
+    sim = Simulation(rho, model, method; timestep = 0.002 * βc)
 
     # Define an empty vector to store our output
     xis = Float64[]
 
     # Run the simulation!
-    simulate!(sim; maxshots=100) do simstep
+    simulate!(sim; numsteps = 1000, maxshots=100) do simstep
+        if simulationinfo(simstep).iterations == 0
+            return nothing
+        end
 
         # Compute the density matrix
         dm = DensityMatrix(quantumstate(simstep), obsalg)
 
         # Append the correlation length to the output vector
         push!(xis, correlationlength(dm))
+
+        return nothing
     end
 
     return xis
 end
 ```
+
+# Related Literature 
 
 

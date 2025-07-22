@@ -4,14 +4,6 @@ layout: collection
 permalink: /software/
 collection: software
 entries_layout: grid
-classes: wide
-gallery:
-  - url: /software/time-evolution-pepo/
-    image_path: /assets/images/time-evolution-pepo.png
-    caption: "TimeEvolutionPEPO.jl"
-    title: "TimeEvolutionPEPO.jl"
-  - url: /software/time-evolution-pepo/
-    image_path: /assets/images/time-evolution-pepo.png
-    caption: "TimeEvolutionPEPO.jl"
-    title: "TimeEvolutionPEPO.jl"
 ---
+
+The Quantum Modelling Center supports the development of a number of research software packages related to the modelling of quantum systems.

@@ -11,7 +11,7 @@ $serif      : Georgia, Times, serif;
 $sans-serif : Roboto;
 $monospace  : "Roboto Mono";
 
-$doc-font-size:   12px !default;
+$doc-font-size:   14px !default;
 
 @import "minimal-mistakes/skins/{{ site.minimal_mistakes_skin | default: 'default' }}"; // skin
 @import "minimal-mistakes"; // main partials
@@ -47,3 +47,44 @@ $doc-font-size:   12px !default;
   font-style: italic;
   font-size: $type-size-8;
 }
+
+.sidebar {
+  opacity: 1;
+  a:not(.btn) {
+    &:hover {
+      text-decoration: underline;
+
+      img {
+        box-shadow: 0 0 10px rgba(#000, 0.25);
+      }
+    }
+  }
+  li {
+    font-size: $type-size-5;
+  }
+}
+/* 
+  Two column grid; just sets style for medium screens to that of small screens
+*/
+.grid__item {
+  @include breakpoint($medium) {
+    float: inline-start;
+    width: span(5 of 10);
+
+    &:nth-child(2n + 1) {
+      clear: both;
+      margin-inline-start: 0;
+    }
+
+    &:nth-child(2n + 2) {
+      clear: none;
+      margin-inline-start: gutter(of 10);
+    }
+  }
+  .archive__item-teaser {
+    @include breakpoint($medium) {
+      max-height: 200px;
+  }
+}
+}
+

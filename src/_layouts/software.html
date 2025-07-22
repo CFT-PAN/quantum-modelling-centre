@@ -1,0 +1,29 @@
+---
+layout: single
+---
+
+{{ page.excerpt }}
+
+<h1>Dependencies</h1>
+{{ page.title}} requires the following prerequisite installs:
+<ul>
+  {% for dep in page.deps %}
+      <li>
+          {%- assign depname = dep.name | capitalize -%}
+          {% for item in site.tutorials %}
+            {%- assign doclink = '/tutorials/' | append: dep.name | append: '/' -%}
+            {%- assign nodoc = true -%}
+            {% if item.url == doclink %}
+              <a href="/tutorials/{{ dep.name }}"><i class="fa-solid fa-fw fa-book" aria-hidden="true"></i><span class="label"></a>{{ depname }} {{ dep.version }}</span>
+              {%- assign nodoc = false -%}
+              {% break %}
+            {% endif %}
+          {% endfor %}
+          {% if nodoc %}
+            <span class="label">{{ depname }} {{ dep.version }}</span>
+          {% endif %}
+      </li>
+  {% endfor %}
+</ul>
+
+{{ content }}
