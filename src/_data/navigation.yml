@@ -3,6 +3,8 @@ main:
     url: /index/
   - title: "Research Software"
     url: /software/
+  - title: "Example Problems"
+    url: /problems/
   - title: "Tutorials"
     url: /tutorials/
   - title: "About"
