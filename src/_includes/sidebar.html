@@ -1,0 +1,29 @@
+{% if page.toc_sidebar %}
+  <div class="sidebar sticky" font-size=1em>
+    <nav class="toc">
+      <header><h4 class="nav__title"><i class="fas fa-{{ include.icon | default: 'file-alt' }}"></i> {{ page.title | default: site.data.ui-text[site.locale].toc_label }}</h4></header>
+        {% include toc.html html=content class="toc__menu" h_min=1 h_max=2 item_class="toc__menu" sanitize=true %}
+    </nav>
+  </div>
+{% endif %}
+{% if page.sidebar %}
+<div class="sidebar sticky"
+  <li>
+    {% if page.github %}
+      <a href="https://github.com/{{ page.github }}" itemprop="sameAs" rel="nofollow noopener noreferrer me">
+          <i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">Source Code</span>
+      </a>
+    {% endif %}
+    {% if page.gitlab %}
+      <a href="https://github.com/{{ page.github }}" itemprop="sameAs" rel="nofollow noopener noreferrer me">
+          <i class="fab fa-fw fa-gitlab" aria-hidden="true"></i><span class="label">Source Code</span>
+      </a>
+    {% endif %}
+    {% if page.docs %}
+      <a href="{{ page.docs }}" itemprop="sameAs" rel="nofollow noopener noreferrer me">
+          <i class="fa-solid fa-fw fa-book" aria-hidden="true"></i><span class="label">Documentation</span>
+      </a>
+    {% endif %}
+  </li>
+</div>
+{% endif %}

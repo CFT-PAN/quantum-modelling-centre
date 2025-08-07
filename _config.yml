@@ -1,6 +1,8 @@
 title: Quantum Modelling Center
+masthead_title: " "
 description: The Quantum Modelling Center is a open-source platform for hosting software and tutorials themed around the modelling of quantum systems.
 email: jdunham@cft.edu.pl
+repository: CFT-PAN/quantum-modelling-centre
 
 lsi: false
 safe: true
@@ -50,6 +52,7 @@ defaults:
       type: software
     values:
       layout: single
+      sidebar: true
   - scope:
       path: ""
       type: problems
@@ -61,8 +64,10 @@ defaults:
     values:
       layout: single
       read_time: true
-      toc: true
-      toc_sticky: true
+      toc_sidebar: true
+
+
+logo: assets/images/QMC-LOGO-alpha.png
 
 sass:
   style: :compressed
@@ -75,8 +80,16 @@ plugins:
   - jekyll-seo-tag
   - jekyll-remote-theme
   - jekyll-include-cache
+  - jekyll-scholar
 
 permalink: /:categories/:year/:month/:day/:title:output_ext
 #
 # remote_theme: "jekyll/minima@0b7ca6b"
 remote_theme: "mmistakes/minimal-mistakes@4.27.1"
+
+enable_copy_code_button: true
+
+# External urls
+
+links:
+  julia: "https://julialang.org"

@@ -7,7 +7,7 @@ excerpt: "VMPOMC.jl is a Julia package for solving the Lindblad master equation"
 
 # Installation:
 
-Simple clone the [repository](https://github.com/dhryniuk/VMPOMC) via
+Simply clone the [repository](https://github.com/dhryniuk/VMPOMC) via
 ```
 git clone https://github.com/dhryniuk/VMPOMC.git
 ```
