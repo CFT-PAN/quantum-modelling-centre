@@ -7,7 +7,7 @@ permalink: /about/
 
 This code platform featuring open codes and models was developed as part of the EUCENTRAL project (Horizon Europe project no. 101186579). It will serve as a testing environment for both theoretical concepts and technological solutions. It will enable the evaluation of the feasibility of new technological ideas before proceeding to experimental trials and implementations. 
 
-It’s designed as a user-friendly environment, showcasing software capabilities and modelling skills, to foster interest in the field and pave the way for new research and collaboration. The website includes the Research Software section, featuring software packages, and the Tutorial section, featuring tutorials on software development. The contents of the website are available free of charge to all visitors.
+It’s designed as a user-friendly environment, showcasing software capabilities and modelling skills, to foster interest in the field and pave the way for new research and collaboration. The website includes the Research Software section, featuring software packages, and the Tutorial section, featuring tutorials on software development. Apart from these, we’re also including an Example problems section, along with proposed solutions, to teach you how to use these in practice.
 
 
 # Developers
@@ -56,6 +56,8 @@ CTP PAS is the institution implementing the EUCENTRAL grant and its principal in
 **University College London (UCL)**, est. 1826...
 
 # About EUCENTRAL project
+
+![cft]({{ site.baseurl }}/assets/images/EU_central_logo.png){: style="width: 300px; height: auto; display: block; margin: 0 auto;"}
 
 **EUCENTRAL** is a Horizon Europe project (no. 101186579) and part of the ERA Chairs call. Its chief goal is to increase an institution’s research capacity, coordinated by a world-renowned senior researcher - an ERA Chair holder. 
 
