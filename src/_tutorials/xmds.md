@@ -1,6 +1,15 @@
 ---
 title: XMDS
+author: jdunham
 ---
+
+{% if page.author %}
+  {% assign author_id = page.author %}
+  {% assign author = site.data.authors[author_id] %}
+  <p class="page__meta" style="margin-top: 0.5em; margin-bottom: 2.0em; line-height: 1.2; color: grey; font-size: 1.0em; font-style: italic;">
+    By {{ author.name }}
+  </p>
+{% endif %}
 
 # Installing XMDS locally
 

@@ -1,0 +1,22 @@
+# _data/authors.yml
+dhryniuk:
+  name: "Dawid A. Hryniuk"
+  affiliations:
+    - "Department of Physics and Astronomy, University College London, Gower Street, London, WC1E 6BT, United Kingdom"
+    - "London Centre for Nanotechnology, University College London, Gordon Street, London WC1H 0AH, United Kingdom"
+  links:
+    - label: "Google Scholar"
+      icon: "fas fa-graduation-cap"
+      url: "https://scholar.google.com/citations?user=MZy4NNkAAAAJ&hl=en&oi=ao"
+    - label: "GitHub"
+      icon: "fab fa-github"
+      url: "https://github.com/dhryniuk"
+
+jdunham:
+  name: "Jack Dunham"
+  affiliations:
+    - "Department of Physics and Astronomy, University College London, Gower Street, London, WC1E 6BT, United Kingdom"
+  links:
+    - label: "GitHub"
+      icon: "fab fa-github"
+      url: "https://github.com/jack-dunham"

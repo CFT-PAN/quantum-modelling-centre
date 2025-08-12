@@ -9,6 +9,12 @@ software:
       excerpt: "Research Software supported by the Quantum Modelling Center at CFT."
       url: "/software/"
       btn_label: "Click here"
+problems:
+    - title: "Example Problems"
+      image_path: https://picsum.photos/300/200
+      excerpt: "Pedagogical walk-throughs through some archetypal problems soluable with our software packages."
+      url: "/tutorials/"
+      btn_label: "Click here"
 tutorials:
     - title: "Tutorials"
       image_path: https://picsum.photos/300/200
@@ -19,4 +25,5 @@ tutorials:
 
 {% include feature_row type="center" id="intro" %}
 {% include feature_row type="left" id="software" %}
-{% include feature_row type="right" id="tutorials" %}
+{% include feature_row type="right" id="problems" %}
+{% include feature_row type="left" id="tutorials" %}

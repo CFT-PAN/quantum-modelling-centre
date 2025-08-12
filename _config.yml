@@ -53,11 +53,14 @@ defaults:
     values:
       layout: single
       sidebar: true
+      show_author: true
   - scope:
       path: ""
       type: problems
     values:
       layout: single
+      toc_sidebar: true
+      show_author: true
   - scope:
       path: ""
       type: tutorials
@@ -65,6 +68,7 @@ defaults:
       layout: single
       read_time: true
       toc_sidebar: true
+      show_author: true
 
 
 logo: assets/images/QMC-LOGO-alpha.png

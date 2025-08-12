@@ -1,15 +1,27 @@
 ---
 title: "Dissipative Ising Model"
 collection: problems
+author: dhryniuk
+show_author: true
+toc_sidebar: true
+excerpt: "In this tutorial, we will use exact diagonalization, [tMPS.jl]({{ site.baseurl }}/software/tmps), and [VMPOMC.jl]({{ site.baseurl }}/software/vmpomc) to study the properties of a class of dissipative transverse-field Ising models."
 ---
 
-# Recommended tutorials:
+{% if page.author %}
+  {% assign author_id = page.author %}
+  {% assign author = site.data.authors[author_id] %}
+  <p class="page__meta" style="margin-top: 0.5em; margin-bottom: 2.0em; line-height: 1.2; color: grey; font-size: 1.0em; font-style: italic;">
+    By {{ author.name }}
+  </p>
+{% endif %}
+
+In this tutorial, we will use exact diagonalization, [tMPS.jl]({{ site.baseurl }}/software/tmps), and [VMPOMC.jl]({{ site.baseurl }}/software/vmpomc) to study the properties of a class of dissipative transverse-field Ising models.
+
+# Recommended tutorials
 
 [Julia]({{ site.baseurl }}/tutorials/julia)
 
-# Introduction:
-
-In this tutorial, we will use exact diagonalization, [tMPS.jl]({{ site.baseurl }}/software/tmps), and [VMPOMC.jl]({{ site.baseurl }}/software/vmpomc) to study the properties of a class of dissipative transverse-field Ising models.
+# Introduction
 
 We consider a transverse-field Ising model in one-dimension described by the Hamiltonian
 \begin{equation}
@@ -29,19 +41,23 @@ where
 - $\gamma$ is the dissipation rate (we set $\gamma=1$ in our units).
 
 Physically, $\Gamma_k$ implements spontaneous emission of an excited spin into the environment, driving each spin toward the $|\downarrow\rangle$ state.  The competition among the interaction between neighbouring spins ($J\sigma^z_i\sigma^z_{i+1}$), coherent transverse-field flips ($h\sigma^x$) and dissipative decay ($\sqrt{\gamma}\sigma^-$) gives rise to nontrivial non-equilibrium dynamics and steady states.  Other common choices include:
-- Dephasing: $\Gamma_k = \sqrt{\gamma_z},\sigma^z_k$, which randomizes the relative phase in the $[\ket{\uparrow}, \ket{\downarrow}]$ basis without changing populations.
+- Dephasing: $\Gamma_k = \sqrt{\gamma_z}\sigma^z_k$, which randomizes the relative phase in the $[\ket{\uparrow}, \ket{\downarrow}]$ basis without changing populations.
 - Collective decay: $\Gamma = \sqrt{\gamma_c},\sum_k \sigma^-_k$, coupling the entire chain to a common bath and leading to superradiant effects.
 
 
-# Dynamics:
+# Dynamics
 
-TBD
+## Integrating the master equation
 
+## t-MPS
 
+## t-VMPOMC
 
-# Steady state:
+## Exercises
 
-## Exact diagonalization:
+# Steady state
+
+## Exact diagonalization
 
 As one observes above, at long times, the system reaches a steady state $\partial_t \rho = 0$.
 In many cases, one is interested specifically in the steady state; it is possible to characterize it without explicitly time-evolving the system as above, thereby bypassing expensive entangling dynamics. 
@@ -129,11 +145,11 @@ function eigen_sparse(x, n)
     return vals, vecs
 end
 
-evals, evecs = eigen_sparse(L, 1)
+evals, evecs = eigen_sparse(L, 6)
 
 display(evals)
 ```
-This finds the 6 largest eigenvalues, which are found to be all non-negative, with one zero eigenvalue associated with the unique steady state:
+This finds the 6 largest eigenvalues, which are found to be all non-positive, with one zero eigenvalue associated with the unique steady state:
 ```
 6-element Vector{ComplexF64}:
      -1.0265353581717023 - 3.36845317347161e-11im
@@ -149,7 +165,7 @@ The eigenvector associated with the zero eigenvalues can be reshaped and renorma
 ρ./=tr(ρ)
 display(ρ)
 ```
-One can then, for example, study the steady-state magnetization phase diagram as function of the transverse field strength $h$. This can be achieved via
+One can then, for example, study the steady-state magnetization phase diagram as function of the transverse field strength $h$, given by $m_x = \text{tr}\, {\sigma^x\rho}$. This can be achieved via
 ```julia
 function magnetization(op, site::Int64, ρ::Matrix{ComplexF64}, N::Int64)
     first_term_ops = fill(id, N)
@@ -179,7 +195,7 @@ This produces the below figure:
 ![ed]({{ site.baseurl }}/assets/images/problems/ising/ed.jpg)
 
 
-## VMPOMC:
+## VMPOMC
 
 Exact diagonalization of the Liouvillian scales exponentially in system size and quickly becomes intractable. To reach $N=20$ spins, we employ the variational matrix product operator Monte Carlo ([VMPOMC]({{ site.baseurl }}/software/vmpomc)) method, which approximates the steady-state density operator $\rho_{ss}$ as a parameterized MPO and optimizes it stochastically. Below is a minimal script:
 
@@ -201,7 +217,7 @@ h = parse(Float64, ARGS[2])
 const J = 0.5
 const γ = 1.0
 
-# Optimization parameters
+# Optimization hyperparameters
 const N_MC = 250
 const δ = 0.1
 const F = 0.998
@@ -289,14 +305,22 @@ end
 MPI.Finalize()
 exit(0)
 ```
-This script can be run by executing
+This script can be ran by executing
 ```
 mpirun -np X julia vmpomc_ising.jl N h chi
 ```
 where `X` specifies the number of MPI processes, `N` is the number of sites, `h` is the local field strength, and `chi` is the bond dimension. 
-> **Note on performance:**  
-> - A bond dimension of χ=6 at N=20 is found to give accurate estimates of the magnetization at low computational overhead, but larger χ improves fidelity at increased cost.  
-> - Parallelization across MPI ranks speeds up the optimization process by distributing sampling over multiple processes.
+> **Note on hyperparameters:**  
+> The above script makes use of five hyperparameters that control the gradient descent optimization:
+> - `N_MC`: Number of Monte Carlo samples used in the Metropolis sampler. Increasing this improves sampling accuracy but increases computational cost.
+> - `δ`: Initial learning rate scaling factor for the optimizer.
+> - `F`: Learning rate decay factor per iteration, controlling how the learning rate decreases over time.
+> - `ϵ`: Regularization parameter used in the optimizer to stabilize the inversion of the metric matrix. Effectively tunes between SGD and SR.
+> - `N_iterations`: Maximum number of optimization iterations.
+> - `cost_function_threshold`: Threshold for the cost function below which optimization is considered converged. Ideally, we want this to be as close to 0 as possible.
+>
+> Adjusting these parameters affects convergence speed and stability. Start with the above pre-set defaults and tune based on problem size, bond dimension, and observed convergence behavior.
+
 
 To reproduce the phase diagram as in ED, we can run the bash script:
 ```bash
@@ -313,6 +337,19 @@ done
 
 echo "Done"
 ```
-The converged magnetizations for $N=20$ can now be loaded and plotted agains ED results for $N=8$, showing excellent agreement:
+The converged magnetizations for $N=20$ can now be loaded and plotted against ED results for $N=8$, showing excellent agreement:
 
 ![ed]({{ site.baseurl }}/assets/images/problems/ising/ed_vmpomc.jpg)
+
+## Exercises
+
+> - A bond dimension of $χ=6$ is found to give accurate estimates of the magnetization at low computational overhead at $N=20$, but larger χ improves fidelity at increased cost. To see this, fix the value of the local field $h$ and plot the converged magnetizations as function of the bond dimension, starting from $χ=1$, tracking the attained values of the cost function. Use the `time()` function in Julia to also track the total optimization time. Observe how an insufficeintly small bond dimension causes the cost function to plateau at a value that may higher than the set threshold, preventing the results from ever converging.
+> - What happens when we increase or decrease the interaction strength $J$? What is the minimum bond dimension required for convergence in those cases? 
+> - Try to vary and find the optimal hyperparameter values that lead to most rapid convergence. How much can the convergence threshold be loosened before the results become inaccurate?
+> - Suppose the interaction with the external environment leads to spin decay to the $\ket{\rightarrow}$ state, described by the Lindblad jump operator $\Gamma_k = \sqrt{\gamma}(\sigma^z - i\sigma^y)/2$. Compare the resultant phase diagrams for $m_x$, $m_y$, and $m_z$.
+> - Instead of starting each optimization process from a completely random MPO, it may be more efficient to load an already converged MPO at slightly different model parameter values. Try implementing this by appropriately modifying the above scripts.
+
+
+# Two-dimensional lattices - iPEPO
+
+TBD.

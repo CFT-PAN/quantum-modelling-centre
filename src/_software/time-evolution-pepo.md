@@ -1,5 +1,6 @@
 ---
 title: "TimeEvolutionPEPO.jl"
+author: jdunham
 header:
     teaser: /assets/images/time-evolution-pepo.png
     caption: "From:"
@@ -10,9 +11,21 @@ deps:
 
 docs: "https://jack-dunham.github.io/TimeEvolutionPEPO.jl/dev/"
 software_links: true
-layout: software
 excerpt: "TimeEvolutionPEPO.jl is a high-level and domain-specific package for simulating the time-evolution of an open-quantum system represented by the iPEPO ansatz. A variety of options are implemented under one common interface for both Lindblad real-time evolution and thermal state annealing."
 ---
+
+{% if page.author %}
+  {% assign author_id = page.author %}
+  {% assign author = site.data.authors[author_id] %}
+  <p class="page__meta" style="margin-top: 0.5em; margin-bottom: 2.0em; line-height: 1.2; color: grey; font-size: 1.0em; font-style: italic;">
+    By {{ author.name }}
+  </p>
+{% endif %}
+
+TimeEvolutionPEPO.jl is a high-level and domain-specific package for simulating the time-evolution of an open-quantum system represented by the iPEPO ansatz. A variety of options are implemented under one common interface for both Lindblad real-time evolution and thermal state annealing.
+
+Keywords: Open Quantum Systems, Tensor Networks, Spins
+
 
 # Installation
 
