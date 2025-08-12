@@ -14,9 +14,20 @@ gist:
 kramdown:
   math_engine: mathjax
   syntax_highlighter: rouge
+baseurl: ""
+
+nav_pages:
+  - index.md
+  - software.md
+  - problems.md
+  - tutorials.md
+  - about.md
 
 collections:
   software:
+    permalink: /:collection/:path/
+    output: true
+  problems:
     permalink: /:collection/:path/
     output: true
   tutorials:
@@ -42,6 +53,11 @@ defaults:
     values:
       layout: single
       sidebar: true
+  - scope:
+      path: ""
+      type: problems
+    values:
+      layout: single
   - scope:
       path: ""
       type: tutorials

@@ -47,6 +47,12 @@ $doc-font-size:   14px !default;
   font-style: italic;
   font-size: $type-size-8;
 }
+h1 {
+  font-size: 1.25rem;   /* was ~2.5rem */
+}
+h2 {
+  font-size: 1.0rem;   /* was ~2.5rem */
+}
 
 .sidebar {
   opacity: 1;
