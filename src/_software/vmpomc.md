@@ -4,6 +4,8 @@ author: dhryniuk
 header: 
     teaser: /assets/images/method_drawing.svg
 github: "dhryniuk/VMPOMC"
+layout: single
+classes: wide
 excerpt: "A Julia package for solving many-body Lindblad master equations of dissipative spin chains via variational Monte Carlo optimization of matrix product operators. Keywords: Open Quantum Systems, Variational Monte Carlo, Tensor Networks, Spins"
 ---
 

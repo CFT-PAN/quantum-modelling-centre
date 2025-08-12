@@ -8,7 +8,8 @@ github: "jack-dunham/TimeEvolutionPEPO.jl"
 deps:
     - name: julia
       version: 1.11
-
+layout: single
+classes: wide
 docs: "https://jack-dunham.github.io/TimeEvolutionPEPO.jl/dev/"
 software_links: true
 excerpt: "TimeEvolutionPEPO.jl is a high-level and domain-specific package for simulating the time-evolution of an open-quantum system represented by the iPEPO ansatz. A variety of options are implemented under one common interface for both Lindblad real-time evolution and thermal state annealing."

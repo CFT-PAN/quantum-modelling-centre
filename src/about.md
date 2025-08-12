@@ -1,6 +1,8 @@
 ---
 title: About
 permalink: /about/
+layout: single
+classes: wide
 ---
 
 # About the code platform

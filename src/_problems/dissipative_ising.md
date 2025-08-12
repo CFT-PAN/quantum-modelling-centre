@@ -4,6 +4,8 @@ collection: problems
 author: dhryniuk
 show_author: true
 toc_sidebar: true
+layout: single
+classes: wide
 excerpt: "In this tutorial, we will use exact diagonalization, [tMPS.jl]({{ site.baseurl }}/software/tmps), and [VMPOMC.jl]({{ site.baseurl }}/software/vmpomc) to study the properties of a class of dissipative transverse-field Ising models."
 ---
 
