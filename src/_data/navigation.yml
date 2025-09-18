@@ -1,6 +1,6 @@
 main:
   - title: "News"
-    url: /news/
+    url: /news
   - title: "Research Software"
     url: /software/
   - title: "Example Problems"
